@@ -199,9 +199,9 @@ export class SchemaPreprocessor {
           const child = new Node(node, s, [...node.path, 'anyOf', i + '']);
           recurse(node, child, opts);
         });
-      // } else if (schema.type === 'array' && schema.items) {
-      //   const child = new Node(node, schema.items, [...node.path, 'items']);
-      //   recurse(node, child, opts);
+      } else if (schema.type === 'array' && schema.items) {
+        const child = new Node(node, schema.items, [...node.path, 'items']);
+        recurse(node, child, opts);
       } else if (schema.properties) {
         Object.entries(schema.properties).forEach(([id, cschema]) => {
           const path = [...node.path, 'properties', id];

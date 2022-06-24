@@ -1,0 +1,121 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Project API",
+    "description": "Project V3 API declaration",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "contact@site.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "version": "1.0.0"
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  },
+  "servers": [
+    {
+      "url": "/v1/"
+    }
+  ],
+  "paths": {
+    "/export": {
+      "get": {
+        "operationId": "ExportListGet",
+        "tags": ["export"],
+        "summary": "list exports",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "rootTestDate": {
+                      "type": "string",
+                      "format": "date-time",
+                      "nullable": true
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": ["id", "job", "createdAt"],
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "job": {
+                            "type": "object",
+                            "nullable": true,
+                            "required": [
+                              "id",
+                              "timeStarted",
+                              "timeFinished",
+                              "jobSteps"
+                            ],
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "timeStarted": {
+                                "type": "string",
+                                "format": "date-time",
+                                "nullable": true
+                              },
+                              "timeFinished": {
+                                "type": "string",
+                                "format": "date-time",
+                                "nullable": true
+                              },
+                              "jobSteps": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "required": [
+                                    "index",
+                                    "startedAt",
+                                    "finishedAt"
+                                  ],
+                                  "properties": {
+                                    "index": {
+                                      "type": "number"
+                                    },
+                                    "startedAt": {
+                                      "type": "string",
+                                      "format": "date-time",
+                                      "nullable": true
+                                    },
+                                    "finishedAt": {
+                                      "type": "string",
+                                      "format": "date-time",
+                                      "nullable": true
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
